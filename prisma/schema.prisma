@@ -1,0 +1,65 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+    provider = "prisma-client-js"
+    output   = "../generated/prisma"
+}
+
+datasource db {
+    provider = "sqlserver"
+    url      = env("DATABASE_URL")
+}
+
+model City {
+    id   String @unique
+    name String @unique
+
+    from_flight Flight[] @relation(name: "from")
+    to_flight   Flight[] @relation(name: "to")
+
+    @@map("city")
+}
+
+model Flight {
+    id String @id
+
+    from_city String
+    fcity     City   @relation(name: "from", fields: [from_city], references: [id], onDelete: NoAction, onUpdate: NoAction)
+    to_city   String
+    tcity     City   @relation(name: "to", fields: [to_city], references: [id], onDelete: NoAction, onUpdate: NoAction)
+
+    departure_time DateTime
+    arrival_time   DateTime
+
+    price           Float
+    seats_total     Int
+    seats_available Int
+    Ticket          Ticket[]
+
+    @@unique(name: "departure_constraint", [from_city, departure_time])
+    @@unique(name: "arrival_constraint", [to_city, arrival_time])
+    @@index([from_city, to_city, departure_time, arrival_time])
+    @@map("flight")
+}
+
+model Ticket {
+    id                String  @id
+    passenger_name    String?
+    passenger_surname String?
+    passenger_email   String?
+    flight_id         String
+    flight            Flight  @relation(fields: [flight_id], references: [id], onDelete: Cascade, onUpdate: Cascade)
+
+    @@map("ticket")
+}
+
+model Admin {
+    username String  @unique
+    password String?
+
+    @@map("admin")
+}
