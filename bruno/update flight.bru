@@ -1,11 +1,15 @@
 meta {
-  name: flight by id
+  name: update flight
   type: http
-  seq: 2
+  seq: 5
 }
 
-get {
+patch {
   url: {{host}}/flights/bbd8e159-9df8-4a41-9c10-a8a8917bbd44
-  body: none
+  body: json
   auth: inherit
+}
+
+body:json {
+  {"price": 2399.90}
 }
