@@ -1,0 +1,18 @@
+meta {
+  name: update ticket
+  type: http
+  seq: 4
+}
+
+patch {
+  url: {{host}}/tickets/2642952e-e49d-44cb-b228-d25b60cd6407
+  body: json
+  auth: inherit
+}
+
+body:json {
+  {
+    "passenger_name": "Thomas A.",
+    "flight_id": "bbd8e159-9df8-4a41-9c10-a8a8917bbd44"
+  }
+}

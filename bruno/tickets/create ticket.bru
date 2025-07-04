@@ -1,0 +1,20 @@
+meta {
+  name: create ticket
+  type: http
+  seq: 3
+}
+
+post {
+  url: {{host}}/tickets
+  body: json
+  auth: inherit
+}
+
+body:json {
+  {
+    "passenger_name": "Thomas",
+    "passenger_surname": "Anderson",
+    "passenger_email": "thomasanderson@metacortex.com",
+    "flight_id":"007065f2-e9f2-4f4b-b6a9-8dfdc64114ff"
+  }
+}
