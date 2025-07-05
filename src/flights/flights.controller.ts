@@ -9,11 +9,13 @@ import {
     Patch,
     Delete,
     Query,
+    UseGuards,
 } from '@nestjs/common';
 import { FlightsService } from './flights.service';
 import { Prisma } from 'generated/prisma';
 import { CreateFlightDto } from './dto/create-flight.dto';
 import { UpdateFlightDto } from './dto/update-flight.dto';
+import { AuthGuard } from 'src/auth/auth.guard';
 
 @Controller('flights')
 export class FlightsController {
@@ -57,6 +59,7 @@ export class FlightsController {
         return await this.service.getById(id);
     }
 
+    @UseGuards(AuthGuard)
     @Post()
     async create(@Body() dto: CreateFlightDto) {
         try {
@@ -85,6 +88,7 @@ export class FlightsController {
         }
     }
 
+    @UseGuards(AuthGuard)
     @Patch(':id')
     async update(@Param('id') id: string, @Body() dto: UpdateFlightDto) {
         try {
@@ -94,6 +98,7 @@ export class FlightsController {
         }
     }
 
+    @UseGuards(AuthGuard)
     @Delete(':id')
     async delete(@Param('id') id: string) {
         return await this.service.delete(id);

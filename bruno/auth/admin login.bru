@@ -1,0 +1,18 @@
+meta {
+  name: admin login
+  type: http
+  seq: 1
+}
+
+post {
+  url: {{host}}/auth/admin/login
+  body: json
+  auth: inherit
+}
+
+body:json {
+  {
+    "username": "thomasanderson",
+    "password": "neo"
+  }
+}

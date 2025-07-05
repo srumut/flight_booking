@@ -1,0 +1,15 @@
+meta {
+  name: profile
+  type: http
+  seq: 2
+}
+
+get {
+  url: {{host}}/auth/profile
+  body: none
+  auth: inherit
+}
+
+headers {
+  Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJ0aG9tYXNhbmRlcnNvbiIsImlhdCI6MTc1MTcwMzIxMCwiZXhwIjoxNzUxNzAzMjcwfQ.aElwgTz7OiOSXb-umcD-sct63g1Qx4Q9o2Jf9pSSc9c
+}
